@@ -1,0 +1,22 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <FileVersion>1.0.0420.26</FileVersion>
+    <AssemblyName>FIS.USESA.POC.Sharepoint.Selenium</AssemblyName>
+    <RootNamespace>FIS.USESA.POC.Sharepoint.Selenium</RootNamespace>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="DotNetSeleniumExtras.WaitHelpers" Version="3.11.0" />
+    <PackageReference Include="Selenium.Support" Version="4.0.0-alpha05" />
+    <PackageReference Include="Selenium.WebDriver" Version="4.0.0-alpha05" />
+    <PackageReference Include="SpreadsheetGear" Version="8.3.32" />
+  </ItemGroup>
+
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="xcopy /Y &quot;$(SolutionDir)edgedriver_win64_81.0.416.58\msedgedriver.exe&quot;  &quot;$(TargetDir)&quot;&#xD;&#xA;xcopy /Y &quot;$(SolutionDir)*.xlsx&quot;  &quot;$(TargetDir)&quot;" />
+  </Target>
+
+</Project>

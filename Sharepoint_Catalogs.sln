@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.29613.14
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FIS.USESA.POC.Sharepoint.Selenium", "FIS.USESA.POC.Sharepoint.Selenium\FIS.USESA.POC.Sharepoint.Selenium.csproj", "{1D8C3A72-BC51-4AB8-A746-197E03BB5DBE}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "EdgeDriver", "EdgeDriver", "{E625D4BC-6846-464A-93DF-57FBD1200732}"
+	ProjectSection(SolutionItems) = preProject
+		edgedriver_win64_81.0.416.58.zip = edgedriver_win64_81.0.416.58.zip
+	EndProjectSection
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "edgedriver_win64_81.0.416.58", "edgedriver_win64_81.0.416.58", "{82A88132-C030-467B-B962-25D4F5E1A297}"
+	ProjectSection(SolutionItems) = preProject
+		edgedriver_win64_81.0.416.58\msedgedriver.exe = edgedriver_win64_81.0.416.58\msedgedriver.exe
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1D8C3A72-BC51-4AB8-A746-197E03BB5DBE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D8C3A72-BC51-4AB8-A746-197E03BB5DBE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D8C3A72-BC51-4AB8-A746-197E03BB5DBE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D8C3A72-BC51-4AB8-A746-197E03BB5DBE}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{82A88132-C030-467B-B962-25D4F5E1A297} = {E625D4BC-6846-464A-93DF-57FBD1200732}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {695528B7-0121-4197-B904-BB3D2BBB905E}
+	EndGlobalSection
+EndGlobal

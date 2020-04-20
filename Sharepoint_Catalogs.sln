@@ -15,6 +15,13 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "edgedriver_win64_81.0.416.5
 		edgedriver_win64_81.0.416.58\msedgedriver.exe = edgedriver_win64_81.0.416.58\msedgedriver.exe
 	EndProjectSection
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Images", "Images", "{66BAB3EA-79EB-4994-9494-33E26AA9A59B}"
+	ProjectSection(SolutionItems) = preProject
+		images\Architecture.jpg = images\Architecture.jpg
+		images\Diagrams.vsdx = images\Diagrams.vsdx
+		images\Logical_Process.jpg = images\Logical_Process.jpg
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

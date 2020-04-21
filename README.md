@@ -15,7 +15,7 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 | Selenium WebDriver Language Bindings | C# language-specific client driver | 4.0.0-alpha05 (nuGet) |
 | SpreadsheetGear | Excel Automation | https://www.spreadsheetgear.com/ (nuget})
 
-> **Note**: To use Selenium you need both a WebDriver (matching the version of browser you are automating and provided by the browser maker) and a Language Binding assembly (matching the automation language you are using and provided by Selenium).
+> **Note**: To use Selenium you need both a **WebDriver** (matching the version of browser you are automating and provided by the browser maker) and a **Language Binding** assembly (matching the automation language you are using and provided by Selenium).
 
 ---
 ## Solution Architecture
@@ -35,5 +35,5 @@ Here is logically how the functionality works
 ## Interesting Challenges
 
 * The Sharepoint pages are built dynamically so the page elements have random names.  This made selecting page elements by ID not feasible.  The approach used was selecting by XPath instead.
-* The `submit` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the mouse. We execute it instead using the alternate access method `ALT-O`
-* Our Sharepoint site uses Federated Authentication.  I was not successful trying to automate this interaction so that the Sharepoint Client APIs could be used.
+* The `submit` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the mouse. It is execute instead using the alternate access method `ALT-O`
+* The Sharepoint site uses Federated Authentication.  I was not successful trying to automate this interaction so that the Sharepoint Client APIs could be used.

@@ -17,6 +17,7 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 
 > **Note**: To use Selenium you need both a **WebDriver** (matching the version of browser you are automating and provided by the browser maker) and a **Language Binding** assembly (matching the automation language you are using and provided by Selenium).
 
+> **Note**: Alternate Browsers could be used with the corresponding browser specific driver.
 ---
 ## Solution Architecture
 
@@ -24,6 +25,9 @@ A .Net Core console app reads the data out of an excel file and uses selenium to
 
 ![CSProj Changes](images/Architecture.jpg?raw=true)
 
+> **Note**: The associated Excel file is **NOT** included in the Source Code Repo!
+
+> **Note**: Since we are actually driving a Browser Session, we will authenticate to Sharepoint as the current user.
 ---
 ## Logical Flow
 

@@ -41,7 +41,7 @@ Here is logically how the functionality works
 * The Sharepoint pages are built dynamically so the page elements have random names.  This made selecting page elements by ID not feasible.  The approach used was selecting by XPath instead.
 
 ```csharp
-   // code dell in grid
+   // code cell in grid
    codeCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.CODE];
    var code = codeCell.FindElement(By.XPath("./div/a[text()]")).Text;
 ```

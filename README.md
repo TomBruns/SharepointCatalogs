@@ -39,6 +39,34 @@ Here is logically how the functionality works
 ## Interesting Challenges
 
 * The Sharepoint pages are built dynamically so the page elements have random names.  This made selecting page elements by ID not feasible.  The approach used was selecting by XPath instead.
+
+```csharp
+   // code
+   codeCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.CODE];
+   var code = codeCell.FindElement(By.XPath("./div/a[text()]")).Text;
+```
+* The Code field had some unusual behavior using sendkeys to set the entire value (it was randomly dropping the 3rd character).  I worked around it by sending each character of the string separately
+```csharp
+   // this field was randomly dropping characters, I assume this is due to something unique about this field
+   // so I used this character by character approach to slow the entry down
+   codeTextInputField.Clear();
+   for (int i = 0; i < newBusinessProcess.Code.Length; i++)
+   {
+       string letter = newBusinessProcess.Code[i].ToString();
+       codeTextInputField.SendKeys(letter);
+   }
+   //codeTextInputField.SendKeys(newBusinessProcess.Code);
+```
 * The `Save` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the user's mouse. It is executed instead using the alternate access method `ALT-O`
+
+```csharp
+   new Actions(driver).KeyDown(Keys.Alt).SendKeys("O").Perform();
+```
+
 * Since Sharepoint builds the pages dynamically, sometimes the automation needs to wait until the target page element is available in the DOM.
+
+```csharp
+   var codeTextInputField = wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@title='Code Required Field']")));
+```
+
 * The Sharepoint site uses Federated Authentication.  I was not successful trying to automate this interaction so that the Sharepoint Client APIs could be used.

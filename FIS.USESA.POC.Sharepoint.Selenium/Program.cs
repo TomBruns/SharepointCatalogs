@@ -336,16 +336,15 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
         {
             WriteToConsole($"...... Uploading Code: [{newBusinessProcess.Code}] [{newBusinessProcess.ShortDescription}]");
 
-            // find the save button at the bottom of the form
-            //var saveButton = wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@value='Save']")));
-
             var codeTextInputField = wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@title='Code Required Field']")));
             //var codeTextInputField = driver.FindElementByXPath("//input[@title='Code Required Field']");
+
+            // this field was randomly dropping characters, I assume this is due to something unique about this field
+            // so I used this character by character approach to slow the entry down
             codeTextInputField.Clear();
             for (int i = 0; i < newBusinessProcess.Code.Length; i++)
             {
                 string letter = newBusinessProcess.Code[i].ToString();
-                //String s = new StringBuilder().append(c).toString();
                 codeTextInputField.SendKeys(letter);
             }
             //codeTextInputField.SendKeys(newBusinessProcess.Code);

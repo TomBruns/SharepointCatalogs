@@ -2,8 +2,6 @@
 
 The purpose of this project is to automate loading a Sharepoint list from data in an Excel file.
 
-> **Note**: The normal methods of leveraging Sharepoint's native Excel support or the Sharepoint API were not available.
-
 ---
 ## Technologies Leveraged
 |Site | Description | Other |
@@ -18,6 +16,8 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 > **Note**: To use Selenium you need both a **WebDriver** (matching the version of browser you are automating and provided by the browser maker) and a **Language Binding** assembly (matching the automation language you are using and provided by Selenium).
 
 > **Note**: Alternate Browsers could be used with the corresponding browser specific driver.
+
+> **Note**: The alternate methods of leveraging Sharepoint's native Excel import support or the Sharepoint API were not available in this scenario.
 ---
 ## Solution Architecture
 

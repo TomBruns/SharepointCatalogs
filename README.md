@@ -4,7 +4,7 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 
 ---
 ## Technologies Leveraged
-|Site | Description | Addl Info |
+|Technology | Description | Addl Info |
 |---- | ------------ | ------- |
 | Console App  | C# Procedural Logic | .Net Core v3.1 |
 | Microsoft Edge (Chromium) | Browser | v81.0.416.58 |

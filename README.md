@@ -58,7 +58,7 @@ Here is logically how the functionality works
    }
    //codeTextInputField.SendKeys(newBusinessProcess.Code);
 ```
-* The `Save` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the user's mouse and the field on the screen. It is executed instead using the alternate access method `ALT-O`
+* The `Save` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the user's mouse and the field on the screen. It is executed instead using this button's alternate access method `ALT-O`
 
 ```csharp
    // funny enough, the Save Action is mapped to ALT-O on this page

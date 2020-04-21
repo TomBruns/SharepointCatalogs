@@ -8,7 +8,7 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 |---- | ------------ | ------- |
 | Console App  | Automation Logic (C#) | .Net Core v3.1 |
 | Microsoft Edge (Chromium) | Browser | v81.0.416.58 |
-| Microsoft Edge Driver | Webdriver compatible driver | https://msedgewebdriverstorage.z22.web.core.windows.net/ |
+| Microsoft Edge Driver | Webdriver compatible driver | https://msedgewebdriverstorage.z22.web.core.windows.net/ (included in solution) |
 | Selenium Client | Brower Automation API | 4.0.0-alpha05 (via nuGet) |
 | Selenium WebDriver Language Bindings | C# language-specific client driver | 4.0.0-alpha05 (via nuGet) |
 | SpreadsheetGear | Excel Automation | https://www.spreadsheetgear.com/ (via nuget)

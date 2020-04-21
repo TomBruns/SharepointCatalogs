@@ -19,17 +19,25 @@ using static FIS.USESA.POC.Sharepoint.Selinium.Constants;
 
 namespace FIS.USESA.POC.Sharepoint.Selenium
 {
+    /// <summary>
+    /// This class uses Selenium to drive a browser session to auotmate entering data into the Business Process list in our Sharepoint Catalog
+    /// Credit goes to Ramesh who suggested this approach.
+    /// </summary>
     class Program
     {
         static void Main(string[] args)
         {
             WriteToConsole("Load Business Process Catalog...");
 
-            string filePathName = @".\ProcessesOwners20200310_Ramesh updated v2.xlsx";
+            string excelFilePathName = @".\ProcessesOwners20200310_Ramesh updated v2.xlsx";
             string worksheetName = @"Processes with Sites grouped by";
+            string browserLocation = @"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+            string sharepointURL = @"https://gsp.worldpay.com/sites/ITStrategyandArchitecture/SitePages/Home.aspx";
 
             #region Step 0.1: Load Business Processes from Excel
-            Dictionary<string, BusinessProcessBE> newBusinessProcesses = LoadBusinessProcessesFromExcel(filePathName, worksheetName);
+            WriteToConsole(@"Step 0.1: Load Business Processes from Excel");
+
+            Dictionary<string, BusinessProcessBE> newBusinessProcesses = LoadBusinessProcessesFromExcel(excelFilePathName, worksheetName);
 
             var rtoFilter = new List<string>() { @"1", @"2", @"4", @"24" };
             var filteredNewBusinessProcesses = newBusinessProcesses.Values
@@ -38,10 +46,11 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
                                                 .ToList();
             #endregion
 
+            WriteToConsole(@"Step 1.0: Open the browser");
             var edgeOptions = new EdgeOptions()
             {
                 UseChromium = true,
-                BinaryLocation = @"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe"
+                BinaryLocation = browserLocation
             };
 
             string edgeDriverDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -51,7 +60,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
             {
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
-                driver.Navigate().GoToUrl(@"https://gsp.worldpay.com/sites/ITStrategyandArchitecture/SitePages/Home.aspx");
+                driver.Navigate().GoToUrl(sharepointURL);
 
                 #region ==== Step 1.1: Pick account to use to signin => Vantiv, now worldpay
                 WriteToConsole(@"Step 1.1: Click on Vantiv, now Worldpay");
@@ -80,6 +89,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
                 WriteToConsole(@"Step 1.3: Navigate to the Business Processes Page");
                 #endregion
 
+                // create a dictionary to hold the current entries
                 Dictionary<string, BusinessProcessBE> existingBusinessProcesses = new Dictionary<string, BusinessProcessBE>();
 
                 #region Step 2.1: Load all of the existing Business Processes
@@ -361,6 +371,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
             var statusSelectField = new SelectElement(statusField);
             statusSelectField.SelectByText(newBusinessProcess.Status);
 
+            // I tried alot of options to click the save button until i found 1 that worked!
             //System.Console.WriteLine($"......Pausing 5 secs to let the DOM settle and for the Save button to become interactable");
             //Thread.Sleep(5000);
 

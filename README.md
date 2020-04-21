@@ -40,5 +40,5 @@ Here is logically how the functionality works
 
 * The Sharepoint pages are built dynamically so the page elements have random names.  This made selecting page elements by ID not feasible.  The approach used was selecting by XPath instead.
 * The `Save` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the user's mouse. It is executed instead using the alternate access method `ALT-O`
-* Since the pages are built dynamically, sometimes the auotmation needs to wait until the target page element is availabel in the DOM.
+* Since the pages are built dynamically, sometimes the automation needs to wait until the target page element is available in the DOM.
 * The Sharepoint site uses Federated Authentication.  I was not successful trying to automate this interaction so that the Sharepoint Client APIs could be used.

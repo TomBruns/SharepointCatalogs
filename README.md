@@ -11,7 +11,7 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 | Microsoft Edge Driver | Webdriver compatible driver | https://msedgewebdriverstorage.z22.web.core.windows.net/ (included in solution) |
 | Selenium Client | Brower Automation API | 4.0.0-alpha05 (via nuGet) |
 | Selenium WebDriver Language Bindings | C# language-specific client driver | 4.0.0-alpha05 (via nuGet) |
-| SpreadsheetGear | Excel XLSX file integration | https://www.spreadsheetgear.com/ (via nuget)
+| SpreadsheetGear | Excel (xlsx) file integration api | https://www.spreadsheetgear.com/ (via nuget)
 
 > **Note**: To use Selenium you need both a **WebDriver** (matching the version of browser you are automating and provided by the browser maker) and a **Language Binding** assembly (matching the automation language you are using and provided by Selenium).
 

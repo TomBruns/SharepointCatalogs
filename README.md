@@ -61,7 +61,7 @@ Here is logically how the functionality works
 * The `Save` button on the `New Item` page seems to only be enabled based on some difficult to automate interaction with the user's mouse and the field on the screen. It is executed instead using this button's alternate access method `ALT-O`
 
 ```csharp
-   // funny enough, the Save Action is mapped to ALT-O on this page
+   // funny enough, the Save Button is mapped to ALT-O on this page
    new Actions(driver).KeyDown(Keys.Alt).SendKeys("O").Perform();
 ```
 

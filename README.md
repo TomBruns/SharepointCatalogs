@@ -43,6 +43,7 @@ Here is logically how the functionality works
 ```csharp
    // code cell in grid
    codeCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.CODE];
+   // get the value
    var code = codeCell.FindElement(By.XPath("./div/a[text()]")).Text;
 ```
 * The Code field had some unusual behavior using sendkeys to set the entire value (it was randomly dropping the 3rd character).  I worked around it by sending each character of the string separately

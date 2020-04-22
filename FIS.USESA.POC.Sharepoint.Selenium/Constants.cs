@@ -6,6 +6,12 @@ namespace FIS.USESA.POC.Sharepoint.Selinium
 {
     static class Constants
     {
+        public enum CATALOG_TYPES
+        {
+            UNKNOWN = 0,
+            BUSINESS_PROCESSES
+        }
+
         public enum BUSINESS_PROCESS_GRID_COLS
         {
             CHECKBOX = 0,
@@ -19,7 +25,7 @@ namespace FIS.USESA.POC.Sharepoint.Selinium
             STATUS
         }
 
-        public enum EXCEL_COLS
+        public enum BUSINESS_PROCESS_EXCEL_COLS
         {
             PLAN_TIER = 0,
             PLAN_NAME,

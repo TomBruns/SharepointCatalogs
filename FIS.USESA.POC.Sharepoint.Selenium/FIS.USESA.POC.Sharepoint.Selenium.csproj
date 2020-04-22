@@ -3,7 +3,7 @@
   <PropertyGroup>
     <OutputType>Exe</OutputType>
     <TargetFramework>netcoreapp3.1</TargetFramework>
-    <FileVersion>1.0.0421.0</FileVersion>
+    <FileVersion>1.0.0422.1</FileVersion>
     <AssemblyName>FIS.USESA.POC.Sharepoint.Selenium</AssemblyName>
     <RootNamespace>FIS.USESA.POC.Sharepoint.Selenium</RootNamespace>
   </PropertyGroup>

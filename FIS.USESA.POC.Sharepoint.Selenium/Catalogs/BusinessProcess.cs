@@ -39,12 +39,12 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             Utilities.WriteToConsole("Load Business Process Catalog...");
 
             #region ==== Step 2.1: Load Business Processes from Excel
-            Utilities.WriteToConsole(@"Step 0.1: Load Business Processes from Excel");
+            Utilities.WriteToConsole(@"Step 2.1: Load Business Processes from Excel");
 
             Dictionary<string, BusinessProcessBE> newBusinessProcesses = LoadBusinessProcessesFromExcel(excelFilePathName, worksheetName);
 
             var filteredNewBusinessProcesses = newBusinessProcesses.Values
-                                                .Where(v => rtoFilter.Contains(v.RTO))
+                                                .Where(v => rtoFilter.Contains(v.RTO) || rtoFilter.Count == 0)
                                                 .OrderBy(v => v.RTONum).ThenBy(v => v.ShortDescription)
                                                 .ToList();
             #endregion
@@ -55,7 +55,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
 
             businessProcessesLink.Click();
 
-            Utilities.WriteToConsole(@"Step 1.3: Navigate to the Business Processes Page");
+            Utilities.WriteToConsole(@"Step 2.2: Navigate to the Business Processes Page");
             #endregion
 
             // create a dictionary to hold the current entries
@@ -66,7 +66,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             int pageCount = 1;
             while (isMorePages)
             {
-                Utilities.WriteToConsole($"Step 2.1: Load page [{pageCount}] of existing Business Processes");
+                Utilities.WriteToConsole($"Step 2.3: Load page [{pageCount}] of existing Business Processes");
 
                 isMorePages = LoadExisitingBusinessProcesses(driver, wait, existingBusinessProcesses);
                 pageCount++;
@@ -76,7 +76,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             int largestCodePartSuffix = -1;
             #region ==== Step 2.4 Find the highest Code number used so far
 
-            System.Console.WriteLine(@"Step 2.2: Find the highest Code number used so far");
+            System.Console.WriteLine(@"Step 2.4: Find the highest Code number used so far");
 
             string[] codeParts;
 

@@ -5,6 +5,8 @@ using System.Linq;
 using System.Reflection;
 using System.Threading;
 
+using Microsoft.Extensions.Configuration;
+
 using OpenQA.Selenium;
 using OpenQA.Selenium.Edge;
 using OpenQA.Selenium.Interactions;
@@ -16,6 +18,7 @@ using SpreadsheetGear;
 
 using FIS.USESA.POC.Sharepoint.Selinium.Entities;
 using static FIS.USESA.POC.Sharepoint.Selinium.Constants;
+using FIS.USESA.POC.Sharepoint.Selenium.Entities;
 
 namespace FIS.USESA.POC.Sharepoint.Selenium
 {
@@ -27,19 +30,27 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
     {
         static void Main(string[] args)
         {
-            CATALOG_TYPES catalogType = CATALOG_TYPES.BUSINESS_PROCESSES;
-            string excelFilePathName = @".\ProcessesOwners20200310_Ramesh updated v2.xlsx";
-            var rtoFilter = new List<string>() { @"1", @"2", @"4", @"24" };
+            // load plug-in specific configuration from appsettings.json file copied into the plug-in specific subfolder 
+            IConfigurationRoot configuration = new ConfigurationBuilder()
+                .SetBasePath(Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location))
+                .AddJsonFile("appsettings.json", false)
+                .Build();
 
-            string worksheetName = @"Processes with Sites grouped by";
-            string browserLocation = @"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
-            string sharepointURL = @"https://gsp.worldpay.com/sites/ITStrategyandArchitecture/SitePages/Home.aspx";
+            var loadProcessConfig = configuration.GetSection("loadConfig").Get<LoadProcessConfigBE>();
+
+            //CATALOG_TYPES catalogType = CATALOG_TYPES.BUSINESS_PROCESSES;
+            //string excelFilePathName = @".\ProcessesOwners20200310_Ramesh updated v2.xlsx";
+            //var rtoFilter = new List<string>() { @"1", @"2", @"4", @"24" };
+
+            //string worksheetName = @"Processes with Sites grouped by";
+            //string browserLocation = @"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
+            //string sharepointURL = @"https://gsp.worldpay.com/sites/ITStrategyandArchitecture/SitePages/Home.aspx";
 
             Utilities.WriteToConsole(@"Step 1.0: Open the browser");
             var edgeOptions = new EdgeOptions()
             {
                 UseChromium = true,
-                BinaryLocation = browserLocation
+                BinaryLocation = loadProcessConfig.BrowserLocation
             };
 
             string edgeDriverDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
@@ -49,7 +60,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
             {
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
-                driver.Navigate().GoToUrl(sharepointURL);
+                driver.Navigate().GoToUrl(loadProcessConfig.SharepointURL);
 
                 #region ==== Step 1.1: Pick account to use to signin => Vantiv, now worldpay
                 Utilities.WriteToConsole(@"Step 1.1: Click on Vantiv, now Worldpay");
@@ -70,10 +81,10 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
                 #endregion
 
                 // call the appropriate Upload method
-                switch (catalogType)
+                switch (loadProcessConfig.CatalogType)
                 {
                     case CATALOG_TYPES.BUSINESS_PROCESSES:
-                        Catalogs.BusinessProcess.Upload(excelFilePathName, worksheetName, rtoFilter, driver, wait);
+                        Catalogs.BusinessProcess.Upload(loadProcessConfig.ExcelFilePathName, loadProcessConfig.WorksheetName, loadProcessConfig.RtoFilter, driver, wait);
                         break;
                 }
             }

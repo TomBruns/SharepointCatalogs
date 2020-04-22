@@ -4,7 +4,7 @@ using System.Text;
 
 namespace FIS.USESA.POC.Sharepoint.Selinium
 {
-    static class Constants
+    public static class Constants
     {
         public enum CATALOG_TYPES
         {

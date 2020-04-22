@@ -127,6 +127,10 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
 
                     UploadNewBusinessProcess(driver, wait, newBusinessProcess);
                 }
+                else
+                {
+                    Utilities.WriteToConsole($"Step 3.0 Skipping Business Process: [{filteredNewBusinessProcess.ShortDescription}], already in the list.");
+                }
             }
             #endregion
 

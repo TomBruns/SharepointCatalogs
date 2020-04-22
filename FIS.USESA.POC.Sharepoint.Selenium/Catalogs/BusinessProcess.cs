@@ -47,6 +47,9 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
                                                 .Where(v => rtoFilter.Contains(v.RTO) || rtoFilter.Count == 0)
                                                 .OrderBy(v => v.RTONum).ThenBy(v => v.ShortDescription)
                                                 .ToList();
+
+            var rtoFilterList = String.Join(",", rtoFilter.Select(x => x.ToString()).ToArray());
+            Utilities.WriteToConsole($"....... Loaded [{filteredNewBusinessProcesses.Count}] entries using RTO filter: [{rtoFilterList}]");
             #endregion
 
             #region ==== Step 2.2: Navigate to the Business Processes Page
@@ -194,9 +197,6 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             //var mainBizProcessTableBody = wait.Until(ExpectedConditions.ElementExists(By.XPath("child::tbody")));
             var mainBizProcessTableBody = mainBizProcessTable.FindElement(By.XPath("child::tbody"));
 
-            //System.Console.WriteLine($"......Pausing 10 secs to let the DOM settle after dynamically building the table");
-            //Thread.Sleep(10000);
-
             // workaround because xpath axis queries do not work in wait.Until
             //var tableRowsTest = wait.Until(ExpectedConditions.ElementExists(By.XPath("child::tr")));
             IReadOnlyCollection<IWebElement> tableRows = null;
@@ -242,8 +242,6 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
                 shortDescriptionCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.SHORT_DESCRIPTION];
                 var shortDescription = shortDescriptionCell.Text;
 
-                Utilities.WriteToConsole($"...... Loading code [{code}] [{shortDescription}]");
-
                 // location
                 locationCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.LOCATION];
                 //var location = locationCell.Text;
@@ -254,7 +252,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
 
                 // rto
                 rtoCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.RTO];
-                //var rto = rtoCell.Text;
+                var rto = rtoCell.Text;
 
                 // owner
                 ownerCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.OWNER];
@@ -263,6 +261,8 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
                 // status
                 statusCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.STATUS];
                 //var status = statusCell.FindElement(By.XPath("./a[text()]")).Text;
+
+                Utilities.WriteToConsole($"...... Downloading code [{code}] [{rto}] [{shortDescription}]");
 
                 // add an entry to the collection
                 existingBusinessProcesses.Add(shortDescriptionCell.Text, new BusinessProcessBE()

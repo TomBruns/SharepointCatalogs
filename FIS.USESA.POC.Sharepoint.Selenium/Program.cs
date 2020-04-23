@@ -46,6 +46,10 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
             //string browserLocation = @"C:\\Program Files (x86)\\Microsoft\\Edge\\Application\\msedge.exe";
             //string sharepointURL = @"https://gsp.worldpay.com/sites/ITStrategyandArchitecture/SitePages/Home.aspx";
 
+            Utilities.WriteToConsole(@"-------------------------------------------------------------------");
+            Utilities.WriteToConsole(@" Note: You can ignore the log messages from Selenium (white text)");
+            Utilities.WriteToConsole(@"-------------------------------------------------------------------");
+
             Utilities.WriteToConsole(@"Step 1.0: Open the browser");
             var edgeOptions = new EdgeOptions()
             {

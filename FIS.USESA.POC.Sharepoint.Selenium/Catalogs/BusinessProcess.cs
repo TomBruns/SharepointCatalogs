@@ -36,7 +36,9 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
         /// <param name="wait"></param>
         internal static void Upload(string excelFilePathName, string worksheetName, List<string> rtoFilter, EdgeDriver driver, WebDriverWait wait)
         {
-            Utilities.WriteToConsole("Load Business Process Catalog...");
+            Utilities.WriteToConsole("=================================");
+            Utilities.WriteToConsole(" Load Business Process Catalog...");
+            Utilities.WriteToConsole("=================================");
 
             #region ==== Step 2.1: Load Business Processes from Excel
             Utilities.WriteToConsole(@"Step 2.1: Load Business Processes from Excel");
@@ -44,11 +46,11 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             Dictionary<string, BusinessProcessBE> newBusinessProcesses = LoadBusinessProcessesFromExcel(excelFilePathName, worksheetName);
 
             var filteredNewBusinessProcesses = newBusinessProcesses.Values
-                                                .Where(v => rtoFilter.Contains(v.RTO) || rtoFilter.Count == 0)
+                                                .Where(v => rtoFilter == null || rtoFilter.Contains(v.RTO))
                                                 .OrderBy(v => v.RTONum).ThenBy(v => v.ShortDescription)
                                                 .ToList();
 
-            var rtoFilterList = String.Join(",", rtoFilter.Select(x => x.ToString()).ToArray());
+            var rtoFilterList = rtoFilter != null ? String.Join(",", rtoFilter.Select(x => x.ToString()).ToArray()) : string.Empty;
             Utilities.WriteToConsole($"....... Loaded [{filteredNewBusinessProcesses.Count}] entries using RTO filter: [{rtoFilterList}]");
             #endregion
 

@@ -12,9 +12,19 @@ namespace FIS.USESA.POC.Sharepoint.Selinium.Entities
         public string Description { get; set; }
         public string RTO { get; set; }
 
-        public decimal RTONum 
+        public decimal? RTONum 
         {
-            get { return decimal.Parse(this.RTO); }
+            get 
+            {
+                if (decimal.TryParse(this.RTO, out decimal result))
+                {
+                    return result;
+                }
+                else
+                {
+                    return (decimal?)null;
+                }
+            }
         }
 
         public string Owner { get; set; }

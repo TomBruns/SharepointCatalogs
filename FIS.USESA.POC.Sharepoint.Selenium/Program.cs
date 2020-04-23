@@ -57,6 +57,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
                 BinaryLocation = loadProcessConfig.BrowserLocation
             };
 
+            // Note: A project post build step copies the driver exe into the target folder
             string edgeDriverDirectory = Path.GetDirectoryName(Assembly.GetExecutingAssembly().Location);
 
             // Use the EdgeDriver class provided with Selenium.
@@ -64,10 +65,14 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
             {
                 WebDriverWait wait = new WebDriverWait(driver, TimeSpan.FromSeconds(20));
 
-                driver.Navigate().GoToUrl(loadProcessConfig.SharepointURL);
+                #region ==== Step 1.1: navigate to the ESA Sharepoint Site
+                Utilities.WriteToConsole(@"Step 1.1: navigate to the ESA Sharepoint Site");
 
-                #region ==== Step 1.1: Pick account to use to signin => Vantiv, now worldpay
-                Utilities.WriteToConsole(@"Step 1.1: Click on Vantiv, now Worldpay");
+                driver.Navigate().GoToUrl(loadProcessConfig.SharepointURL);
+                #endregion
+
+                #region ==== Step 1.2: Pick account to use to signin => Vantiv, now worldpay
+                Utilities.WriteToConsole(@"Step 1.2: Click on Vantiv, now Worldpay link");
 
                 // find the span that has the correct text label
                 var vantivAccount = driver.FindElementByXPath("//span[text()='Vantiv, now Worldpay']");
@@ -76,8 +81,8 @@ namespace FIS.USESA.POC.Sharepoint.Selenium
                 vantivAccount.Click();
                 #endregion
 
-                #region ==== Step 1.2: Navigate to the Catalogs Page
-                Utilities.WriteToConsole(@"Step 1.2: Navigate to the Catalogs Page");
+                #region ==== Step 1.3: Navigate to the Catalogs Page
+                Utilities.WriteToConsole(@"Step 1.3: Navigate to the Catalogs Page");
 
                 var catalogsButton = wait.Until(ExpectedConditions.ElementExists(By.XPath("//img[@alt='catalogSmall.png']")));
 

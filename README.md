@@ -60,7 +60,7 @@ The following configuration options are available in the `appSettings.json` file
 
 | Config Parameter | Description | Options |
 |---- | ------------ | ------- |
-| catalogType | Which Catalog (List) to load | BUSINESS_PROCESSES |
+| catalogType | Which Catalog (Sharepoint List) to load | BUSINESS_PROCESSES |
 | excelFilePathName | Pathname to the excel file (xlsx) containing the data to load | |
 | rtoFilter | RTO Values used to filter rows in the excel file | 0.25, 0.5, 1, 2, 4, 24, 48, 72, 120, 168, 336, 504 |
 | worksheetName | Worksheet name containing the data to load| |

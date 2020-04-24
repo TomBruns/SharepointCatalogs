@@ -20,7 +20,7 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 ---
 ## Solution Architecture
 
-A .Net Core console app reads the data out of an excel file and uses selenium to automate a browser session.
+A .Net Core console app reads the data out of an excel file and uses [Selenium](https://www.selenium.dev/) to automate a browser session.
 
 ![CSProj Changes](images/Architecture.jpg?raw=true)
 

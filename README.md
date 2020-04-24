@@ -13,15 +13,14 @@ The purpose of this project is to automate loading a Sharepoint list from data i
 | Selenium WebDriver Language Bindings | C# language-specific client driver | 4.0.0-alpha05 (via nuGet) |
 | SpreadsheetGear | Excel (xlsx) file integration API | https://www.spreadsheetgear.com/ (via nuget)
 
-> **Note**: To use Selenium you need both a **WebDriver** (matching the version of browser you are automating and provided by the browser maker) and a **Language Binding** assembly (matching the automation language you are using and provided by Selenium).
+> **Note**: To use Selenium you need both a **WebDriver** (that matches the version of browser you are automating and provided by the browser maker) and a **Language Binding** assembly (that matches the automation language you are using and provided by Selenium).
 
-> **Note**: Alternate Browsers could be used with the corresponding browser version specific driver (nothing in the code is Microsoft Edge specific).  The automation code uses the W3C Webdriver API to control the behavior of a web browser.  Each browser manufacturer supplies a Webdriver compatible driver.
+> **Note**: Alternate Browsers could be used with the corresponding browser version specific driver (nothing in the code is Microsoft Edge Browser specific).  The automation code uses the W3C Webdriver API to control the behavior of a web browser.  Each browser manufacturer typically supplies a Webdriver compatible driver.
 
-> **Note**: The alternate methods of leveraging Sharepoint's native Excel import support or the Sharepoint API were not available in this scenario.
 ---
 ## Solution Architecture
 
-A .Net Core console app reads the data out of an excel file and uses selenium to drive a browser session.
+A .Net Core console app reads the data out of an excel file and uses selenium to automate a browser session.
 
 ![CSProj Changes](images/Architecture.jpg?raw=true)
 
@@ -63,22 +62,19 @@ The following configuration options are available in the `appSettings.json` file
 | catalogType | Which Catalog (Sharepoint List) to load | BUSINESS_PROCESSES |
 | excelFilePathName | Pathname to the excel file (xlsx) containing the data to load | |
 | rtoFilter | RTO Values used to filter rows in the excel file | 0.25, 0.5, 1, 2, 4, 24, 48, 72, 120, 168, 336, 504 |
-| worksheetName | Worksheet name containing the data to load| |
+| worksheetName | Name of the worksheet in the Excel file containing the data to load| |
 | browserLocation | Pathname to the browser we are automating | |
-| sharepointURL | URL of the EA homepage | |
+| sharepointURL | URL of the EA homepage on the Sharepoint Site | |
 
 ---
 ## Interesting Challenges
 
-* The Sharepoint pages are built dynamically so the page elements have random names.  This made selecting page elements by ID not feasible.  The approach used was selecting by XPath instead.
+* The Sharepoint pages are built dynamically so the page elements have random names.  This made selecting page elements by ID not feasible.  The alternative approach used was selecting by XPath:
 
 ```csharp
-   // code cell in grid
-   codeCell = tableRowCells[(int)BUSINESS_PROCESS_GRID_COLS.CODE];
-   // get the value
-   var code = codeCell.FindElement(By.XPath("./div/a[text()]")).Text;
+   var businessProcessesLink = driver.FindElementByXPath("//a[text()='CAT-010 - Business Process']")
 ```
-* The Code field had some unusual behavior using sendkeys to set the entire value (it was randomly dropping the 3rd character).  I worked around it by sending each character of the string separately
+* The Code field had some unusual behavior when using sendkeys to set the entire string (it was randomly dropping the 3rd character).  I worked around it by sending each character of the string separately
 ```csharp
    // this field was randomly dropping characters, I assume this is due to something unique about this field
    // so I used this character by character approach to slow the entry down
@@ -103,4 +99,4 @@ The following configuration options are available in the `appSettings.json` file
    var codeTextInputField = wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@title='Code Required Field']")));
 ```
 
-* The Sharepoint site uses Federated Authentication.  I was not successful trying to automate this interaction so that the Sharepoint Client APIs could be used.
+* The Sharepoint site uses Federated Authentication.  I was not successful trying to automate this interaction (This would have enabled the Sharepoint Client APIs to be used).

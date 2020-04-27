@@ -197,7 +197,8 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             //var mainBizProcessTable = driver.FindElementByXPath("//table[@summary='CAT-010 - Business Process']");
 
             //var mainBizProcessTableBody = wait.Until(ExpectedConditions.ElementExists(By.XPath("child::tbody")));
-            var mainBizProcessTableBody = mainBizProcessTable.FindElement(By.XPath("child::tbody"));
+            //var mainBizProcessTableBody = mainBizProcessTable.FindElement(By.XPath("child::tbody"));
+            IWebElement mainBizProcessTableBody = null;
 
             // workaround because xpath axis queries do not work in wait.Until
             //var tableRowsTest = wait.Until(ExpectedConditions.ElementExists(By.XPath("child::tr")));
@@ -206,6 +207,8 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
             {
                 try
                 {
+                    mainBizProcessTableBody = mainBizProcessTable.FindElement(By.XPath("child::tbody"));
+
                     tableRows = mainBizProcessTableBody.FindElements(By.XPath("child::tr"));
                     break;
                 }
@@ -309,7 +312,7 @@ namespace FIS.USESA.POC.Sharepoint.Selenium.Catalogs
         /// <param name="newBusinessProcess"></param>
         private static void UploadNewBusinessProcess(EdgeDriver driver, WebDriverWait wait, BusinessProcessBE newBusinessProcess)
         {
-            Utilities.WriteToConsole($"...... Uploading Code: [{newBusinessProcess.Code}] [{newBusinessProcess.ShortDescription}]");
+            Utilities.WriteToConsole($"...... Uploading Code: [{newBusinessProcess.Code}] [{newBusinessProcess.RTO}] [{newBusinessProcess.ShortDescription}]");
 
             var codeTextInputField = wait.Until(ExpectedConditions.ElementExists(By.XPath("//input[@title='Code Required Field']")));
             //var codeTextInputField = driver.FindElementByXPath("//input[@title='Code Required Field']");
